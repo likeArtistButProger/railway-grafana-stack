@@ -13,10 +13,6 @@ scrape_configs:
         labels:
           node: "node-2"
           location: "helsinki"
-      - targets: ["77.110.120.219:9090"]
-        labels:
-          node: "node-1"
-          location: "stockholm"
 
   # --- mtproxy services (central server) ---
   - job_name: "allocator"
