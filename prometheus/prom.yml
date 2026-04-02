@@ -23,6 +23,11 @@ scrape_configs:
     static_configs:
       - targets: ["65.21.119.62:9201"]
 
+  # --- SOCKS5 proxy API (Finland exit node) ---
+  - job_name: "socks5"
+    static_configs:
+      - targets: ["193.29.224.47:8080"]
+
   # --- System metrics (node_exporter) ---
   - job_name: "node"
     static_configs:
