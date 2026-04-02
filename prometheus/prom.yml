@@ -1,21 +1,38 @@
 global:
-  scrape_interval: 15s # Default scrape interval
+  scrape_interval: 15s
 
 scrape_configs:
-  - job_name: 'prometheus'
+  - job_name: "prometheus"
     static_configs:
-      - targets: ['localhost:9090']
+      - targets: ["localhost:9090"]
 
-  # - job_name: 'example_api'
-  #   scheme: http
-  #   static_configs:
-  #     - targets: ['example_api:9091']
+  # --- Telemt proxy nodes (MTProto) ---
+  - job_name: "telemt"
+    static_configs:
+      - targets: ["109.120.151.102:9090"]
+        labels:
+          node: "node-2"
+          location: "helsinki"
+      - targets: ["77.110.120.219:9090"]
+        labels:
+          node: "node-1"
+          location: "stockholm"
 
-  #  ? TODO: add your services here
-  # - job_name: 'your-job-name'
-  #   scheme: https
-  #   static_configs:
-  #     - targets: ['URL_GOES_HERE']
-  #   basic_auth:
-  #     username: HTTP_AUTH_USERNAME_GOES_HERE
-  #     password: HTTP_AUTH_PASSWORD_GOES_HERE
+  # --- mtproxy services (central server) ---
+  - job_name: "allocator"
+    static_configs:
+      - targets: ["65.21.119.62:9200"]
+
+  - job_name: "payment"
+    static_configs:
+      - targets: ["65.21.119.62:9201"]
+
+  # --- System metrics (node_exporter) ---
+  - job_name: "node"
+    static_configs:
+      - targets: ["65.21.119.62:9100"]
+        labels:
+          server: "central"
+      - targets: ["109.120.151.102:9100"]
+        labels:
+          server: "node-2"
