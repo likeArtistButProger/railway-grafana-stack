@@ -9,7 +9,7 @@ scrape_configs:
   # --- Telemt proxy nodes (MTProto) ---
   - job_name: "telemt"
     static_configs:
-      - targets: ["109.120.151.102:9090"]
+      - targets: ["109.120.151.102:9190"]
         labels:
           node: "node-2"
           location: "helsinki"
